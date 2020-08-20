@@ -19,6 +19,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
+
   <!-- Popper.JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
@@ -28,7 +29,7 @@
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
   <!-- Lottie -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>  
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <!-- Scripts -->
   <script src="main.js"></script>
 </head>
@@ -114,33 +115,29 @@
       <!-- Dynamic Content -->
       <div class="card-deck" id="mainContent">
         <!--Aqui va el contenido-->
+        <!-- Add item card-->
         <div class="card">
           <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_tf6wSv.json" background="transparent"
             speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
           <div class="card-body">
             <h4 class="card-title">Agregar un ítem</h4>
             <p class="card-text">Registra un nuevo repuesto o producto que necesite ser inventariado</p>
-            <a href="#" class="btn btn-primary">Agregar</a>
-          </div>
-        </div>
-        
-        <div class="card">
-          <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_tf6wSv.json" background="transparent"
-            speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
-          <div class="card-body">
-            <h4 class="card-title">Agregar un ítem</h4>
-            <p class="card-text">Registra un nuevo repuesto o producto que necesite ser inventariado</p>
-            <a href="#" class="btn btn-primary">Agregar</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddItemModalForm" data-backdrop="static">
+              Agregar
+            </button>
           </div>
         </div>
 
+        
+        <!-- Search item card-->
+
         <div class="card">
-          <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_tf6wSv.json" background="transparent"
-            speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
+          <lottie-player src="https://assets9.lottiefiles.com/datafiles/Pfr5NhU9MuhGM5L/data.json"
+            background="transparent" speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
           <div class="card-body">
-            <h4 class="card-title">Agregar un ítem</h4>
-            <p class="card-text">Registra un nuevo repuesto o producto que necesite ser inventariado</p>
-            <a href="#" class="btn btn-primary">Agregar</a>
+            <h4 class="card-title">Consultar ítem</h4>
+            <p class="card-text">Consulta información relevante acerca de un ítem</p>
+            <a href="#" class="btn btn-primary">Consultar</a>
           </div>
         </div>
 
@@ -148,6 +145,47 @@
     </div>
 
   </div>
+
+  <!-- Modal form (Add item) -->
+  <div class="modal fade" id="AddItemModalForm">
+    <div class="modal-dialog">
+      <div class="modal-content rounded">
+
+        <!-- Modal Header -->
+        <div class="modal-header bg-primary text-light">
+          <h4 class="modal-title">Agregar Ítem</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action="/action_page.php">
+            <div class="form-group">
+              <label for="email">Email address:</label>
+              <input type="email" class="form-control" placeholder="Enter email" id="email">
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" placeholder="Enter password" id="pwd">
+            </div>
+            <div class="form-group form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox"> Remember me
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer bg-secondary">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>

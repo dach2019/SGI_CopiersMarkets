@@ -15,9 +15,8 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
     integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
     crossorigin="anonymous"></script>
-  <!-- jQuery CDN - Slim version (=without AJAX) -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
 
   <!-- Popper.JS -->
@@ -53,13 +52,13 @@
             class="dropdown-toggle">Inventarios</a>
           <ul class="collapse list-unstyled" id="InventorySubmenu">
             <li>
-              <a id="btnItems" onclick="showItems('Items');">Items</a>
+              <a id="Items" class="sb-options">Items</a>
             </li>
             <li>
-              <a id="btnReferrals">Remisiones</a>
+              <a id="Referrals" class="sb-options">Remisiones</a>
             </li>
             <li>
-              <a id="btnNotes">Notas</a>
+              <a id="Notes" class="sb-options">Notas</a>
             </li>
           </ul>
         </li>
@@ -68,10 +67,10 @@
           <a href="#OrdersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pedidos</a>
           <ul class="collapse list-unstyled" id="OrdersSubmenu">
             <li>
-              <a id="btnOrders">Ordenes</a>
+              <a id="Orders" class="sb-options">Ordenes</a>
             </li>
             <li>
-              <a id="btnSuppliers">Proveedores</a>
+              <a id="Suppliers" class="sb-options">Proveedores</a>
             </li>
           </ul>
         </li>
@@ -80,15 +79,15 @@
           <a href="#UsersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
           <ul class="collapse list-unstyled" id="UsersSubmenu">
             <li>
-              <a id="btnGeneral">General</a>
+              <a id="General" class="sb-options">General</a>
             </li>
             <li>
-              <a id="btnAdmins">Admins</a>
+              <a id="Admins" class="sb-options">Admins</a>
             </li>
           </ul>
         </li>
         <li>
-          <a id="btnHelp">Ayuda</a>
+          <a id="Help" class="sb-options">Ayuda</a>
         </li>
       </ul>
 
@@ -113,37 +112,9 @@
         <h2 id="navBarTitle" class="p-2">Bienvenido</h2>
       </nav>
       <!-- Dynamic Content -->
-      <div class="card-deck" id="mainContent">
-        <!--Aqui va el contenido-->
-        <!-- Add item card-->
-        <div class="card">
-          <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_tf6wSv.json" background="transparent"
-            speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
-          <div class="card-body">
-            <h4 class="card-title">Agregar un ítem</h4>
-            <p class="card-text">Registra un nuevo repuesto o producto que necesite ser inventariado</p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddItemModalForm" data-backdrop="static">
-              Agregar
-            </button>
-          </div>
-        </div>
-
-        
-        <!-- Search item card-->
-
-        <div class="card">
-          <lottie-player src="https://assets9.lottiefiles.com/datafiles/Pfr5NhU9MuhGM5L/data.json"
-            background="transparent" speed="1" style="width: 100%; height: 200px;" loop autoplay></lottie-player>
-          <div class="card-body">
-            <h4 class="card-title">Consultar ítem</h4>
-            <p class="card-text">Consulta información relevante acerca de un ítem</p>
-            <a href="#" class="btn btn-primary">Consultar</a>
-          </div>
-        </div>
-
+      <div id="mainContent">
       </div>
     </div>
-
   </div>
 
   <!-- Modal form (Add item) -->
@@ -159,33 +130,63 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-          <form action="/action_page.php">
-            <div class="form-group">
-              <label for="email">Email address:</label>
-              <input type="email" class="form-control" placeholder="Enter email" id="email">
+          <form id="myform" class="form needs-validation" novalidate action="#">
+            <div class="form-row">
+              <div class="col-md mb-3">
+                <label for="lblCode">Código:</label>
+                <input type="text" class="form-control" id="inpCode" required>
+                <div class="invalid-feedback">
+                  Por favor inserta un código único para identificar el ítem
+                </div>
+              </div>
+              <div class="col-md mb-3">
+                <label for="lblType">Tipo:</label>
+                <select class="form-control" id="iptType" required>
+                  <option selected></option>
+                  <option>Insumo</option>
+                  <option>Repuesto</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor selecciona el tipo del ítem
+                </div>
+              </div>
             </div>
             <div class="form-group">
-              <label for="pwd">Password:</label>
-              <input type="password" class="form-control" placeholder="Enter password" id="pwd">
+              <label for="lblName">Nombre:</label>
+              <input type="text" class="form-control" id="inpName" required>
+              <div class="invalid-feedback">
+                Por favor inserta un nombre para identificar el ítem
+              </div>
             </div>
-            <div class="form-group form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember me
-              </label>
+            <div class="form-row">
+              <div class="col-md mb-3">
+                <label for="lblSecStock">Nivel de seguridad:</label>
+                <input type="number" class="form-control" id="inpSecStock" required>
+                <div class="invalid-feedback">
+                  Por favor inserta el nivel de seguridad de el ítem
+                </div>
+              </div>
+              <div class="col-md mb-3">
+                <label for="lblQuantity">Cantidad:</label>
+                <input type="number" class="form-control" id="inpQuantity" required>
+                <div class="invalid-feedback">
+                  Por favor inserta la cantidad actual del ítem
+                </div>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+              <label for="lblSpecs">Especificaciones:</label>
+              <textarea class="form-control" id="inpSpecs" rows="3" required></textarea>
+              <div class="invalid-feedback">
+                Por favor agrega algunas características sobre el ítem
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>
           </form>
         </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer bg-secondary">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-        </div>
-
       </div>
     </div>
   </div>
-
 </body>
 
 </html>

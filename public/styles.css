@@ -55,9 +55,7 @@ a, a:hover, a:focus {
     margin: 40px 0;
 }
 
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
+/*  ////////////////////////////// Side bar ////////////////////////////// */
 
 .wrapper {
     display: flex;
@@ -70,7 +68,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #50a5d6;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -83,12 +81,12 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #50a5d6;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #007BFF;
 }
 
 #sidebar ul p {
@@ -102,13 +100,13 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #007BFF;
     background: #fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #27a0c5;
 }
 
 
@@ -127,7 +125,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #3d96d1;
 }
 
 ul.CTAs {
@@ -147,9 +145,8 @@ a.exit {
     color: #7386D5;
 }
 
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
+/*  ////////////////////////////// Side bar (Content) ////////////////////////////// */
+
 #content {
     width: 100%;
     padding: 20px;
@@ -193,9 +190,8 @@ a.exit {
 }
 
 
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
+/*  ////////////////////////////// Mediaqueries ////////////////////////////// */
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

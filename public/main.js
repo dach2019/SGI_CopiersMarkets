@@ -18,6 +18,10 @@ $(document).ready(function() {
   }, false);
 })();
 
+function show_table(table){
+  $("#mainContent").load('tables/'+table+'.html');
+}
+
 (function() {
   'use strict';
   window.addEventListener('load', function() {

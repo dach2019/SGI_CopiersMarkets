@@ -8,23 +8,6 @@ $(document).ready(function() {
 (function() {
   'use strict';
   window.addEventListener('load', function() {
-    var options = document.getElementsByClassName('sb-options');
-    var validation = Array.prototype.filter.call(options, function(option) {
-      option.addEventListener('click', function(event) {
-        $("#navBarTitle").html(option.text);
-        $("#mainContent").load('cards/'+option.id+'.html');
-      }, false);
-    });
-  }, false);
-})();
-
-function show_table(table){
-  $("#mainContent").load('tables/'+table+'.html');
-}
-
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
     var forms = document.getElementsByClassName('needs-validation');
     var validation = Array.prototype.filter.call(forms, function(form) {
       form.addEventListener('submit', function(event) {

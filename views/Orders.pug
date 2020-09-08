@@ -10,7 +10,7 @@ block main
             .card-body
                 h4.card-title Crear orden de pedido
                 p.card-text Agrega una nueva orden si necesitas registrar un pedido de material realizado
-                button.btn.btn-primary.btn-lg.btn-block(type='button' data-toggle='modal' data-target='#AddOrderModalForm' data-backdrop='static')
+                a.btn.btn-primary.btn-lg.btn-block(href="/orders/add" role="button")
                     | Agregar
         // Search order card
         .card

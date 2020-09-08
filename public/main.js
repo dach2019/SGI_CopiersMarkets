@@ -1,16 +1,16 @@
-$(document).ready(function() {
+$(document).ready(function () {
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
     $(this).toggleClass('active');
   });
 });
 
-(function() {
+(function () {
   'use strict';
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     var forms = document.getElementsByClassName('needs-validation');
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
@@ -20,4 +20,14 @@ $(document).ready(function() {
     });
   }, false);
 })();
+
+
+$(document).ready(function () {
+  $('#ItemCode').change(updatedValue);
+  function updatedValue(e) {
+    $.getJSON("http://localhost:3000/lookup/" + e.target.value, item => {      
+      $('#ItemName').val(item[0]['name']);
+    }, err => { console.log(err); });
+  }
+});
 

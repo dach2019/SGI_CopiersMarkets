@@ -1,0 +1,46 @@
+extends main
+
+block main
+
+    .container.bg-light.rounded.m-0.p-0.mx-auto(style="width:100%; max-width:500px")
+        .container.bg-primary.text-light.m-0.p-3.rounded-top
+            h4.m-0 Agregar Ítem
+        .container.m-0.p-3
+            form.form.needs-validation(novalidate='' action='/items/add' method="POST")
+                .form-row
+                    .col-md.mb-3
+                        label C&oacute;digo:
+                        input.form-control(name="code" type='text' required='')
+                        .invalid-feedback
+                            | Por favor inserta un c&oacute;digo &uacute;nico para identificar el &iacute;tem
+                    .col-md.mb-3
+                        label Tipo:
+                        select.form-control(name="type" required='')
+                            option(selected='')
+                            option Insumo
+                            option Repuesto
+                        .invalid-feedback
+                            | Por favor selecciona el tipo del &iacute;tem
+                .form-group
+                    label Nombre:
+                    input.form-control(name="name" type='text' required='')
+                    .invalid-feedback
+                        | Por favor inserta un nombre para identificar el &iacute;tem
+                .form-row
+                    .col-md.mb-3
+                        label Nivel de seguridad:
+                        input.form-control(name="secstock" type='number' required='')
+                        .invalid-feedback
+                            | Por favor inserta el nivel de seguridad de el &iacute;tem
+                    .col-md.mb-3
+                        label Cantidad:
+                        input.form-control(name="stock" type='number' required='')
+                        .invalid-feedback
+                            | Por favor inserta la cantidad actual del &iacute;tem
+                .form-group
+                    label Especificaciones:
+                    textarea.form-control(name="specs" rows='3' required='')
+                    .invalid-feedback
+                        | Por favor agrega algunas caracter&iacute;sticas sobre el &iacute;tem
+                button.btn.btn-success.btn-lg.btn-block Guardar            
+

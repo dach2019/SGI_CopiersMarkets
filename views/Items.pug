@@ -10,7 +10,7 @@ block main
             .card-body
                 h4.card-title Agregar un &iacute;tem
                 p.card-text Registra un nuevo insumo o repuesto necesite ser inventariado
-                button.btn.btn-primary.btn-lg.btn-block(type='button' data-toggle='modal' data-target='#AddItemModalForm' data-backdrop='static')
+                a.btn.btn-primary.btn-lg.btn-block(href="/items/add" role="button")
                     | Agregar
         // Search item card
         .card
@@ -20,3 +20,6 @@ block main
                 p.card-text Consulta informaci&oacute;n relevante acerca de un &iacute;tem registrado en el sistema
                 button.btn.btn-primary.btn-lg.btn-block(type='button' onclick="show_table('Items');")
                     | Consultar
+
+
+

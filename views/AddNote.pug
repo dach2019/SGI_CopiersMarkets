@@ -1,0 +1,48 @@
+extends main
+
+block main
+
+    .container.bg-light.rounded.m-0.p-0.mx-auto(style="width:100%; max-width:500px")
+        .container.bg-primary.text-light.m-0.p-3.rounded-top
+            h4.m-0 Agregar Nota de inventario
+        .container.m-0.p-3
+            form.form.needs-validation(novalidate="" action="/notes/add" method="POST")
+                .form-row
+                    .col-md.mb-3
+                        label No. Nota:
+                        input.form-control(name="number" type='number' value=number readonly)
+                    .col-md.mb-3
+                        label Fecha de creaci&oacute;n:
+                        input.form-control(name="date" type="text" value=creationDate readonly)
+                .form-row
+                    .col-md.mb-3
+                        label C&oacute;digo:
+                        select.form-control(id="ItemCode" name="code" required='')
+                            option(selected='')
+                            each item in items
+                                option=item['code']
+                        .invalid-feedback
+                            | Por favor inserta el c&oacute;digo del &iacute;tem
+                    .col-md.mb-3
+                        label Nombre:
+                        input.form-control(id="ItemName" name="name" type='text' readonly)
+                .form-row
+                    .col-md.mb-3
+                        label Tipo:
+                        select.form-control(name="type" required='')
+                            option(selected='')
+                            option Entrada
+                            option Salida
+                        .invalid-feedback
+                            | Por favor selecciona el tipo de movimiento
+                    .col-md.mb-3
+                        label Cantidad:
+                        input.form-control(name="quantity" type='number' required='')
+                        .invalid-feedback
+                            | Por favor inserta la cantidad del &iacute;tem que se va a ajustar
+                .form-group
+                    label Motivo:
+                    textarea.form-control(name="reason" rows='3' required='')
+                    .invalid-feedback
+                            | Por favor inserta el motivo de la nota de inventario
+                button.btn.btn-success.btn-lg.btn-block(type='submit') Guardar

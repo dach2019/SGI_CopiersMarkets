@@ -34,33 +34,36 @@ $(document).ready(function () {
 });
 
 function sendData() {
-    
+
   if (document.getElementById('Form').checkValidity() == true) {
     $.post(
       '/items/add',
       $('#Form').serializeArray(),
-      function(data,status){
-        if(status=='success'){
+      function (data, status) {
+        if (status == 'success') {
           //aqui va un spiner
-          if(data=='registrado'){
+          if (data == 'registrado') {
             $.notify(
-            'Se registro correctamente',
-            {
-              className: 'success',
-              globalPosition: 'top',
-              autoHideDelay: 7000
-            });
-          }else{
+              'Se registro correctamente',
+              {
+                className: 'success',
+                globalPosition: 'top',
+                autoHideDelay: 7000
+              });
+            $('#Form').trigger("reset");
+            document.getElementById('Form').classList.remove('was-validated');
+            
+          } else {
             $.notify(
-              'Hubo un error: '+data,
+              'Hubo un error: ' + data,
               {
                 className: 'error',
                 globalPosition: 'top',
                 autoHideDelay: 7000
               });
-          }  
-          
-        }else{
+          }
+
+        } else {
           alert('no me respondió');
         }
       }

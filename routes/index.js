@@ -24,6 +24,7 @@ module.exports=function(){
     router.get('/admins',main.admins);
 
     router.get('/items/add',items.getAdd);
+    router.get('/items/search',items.getSearch);
     router.post('/items/add',items.postAdd);
 
     router.get('/referrals/add',referrals.getAdd);

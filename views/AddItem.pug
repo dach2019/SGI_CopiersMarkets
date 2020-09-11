@@ -6,7 +6,7 @@ block main
         .container.bg-primary.text-light.m-0.p-3.rounded-top
             h4.m-0 Agregar Ítem
         .container.m-0.p-3
-            form.form.needs-validation(novalidate='' action='/items/add' method="POST")
+            form.form.needs-validation(id='Form' novalidate='' action='javascript:sendData();')
                 .form-row
                     .col-md.mb-3
                         label C&oacute;digo:
@@ -42,5 +42,5 @@ block main
                     textarea.form-control(name="specs" rows='3' required='')
                     .invalid-feedback
                         | Por favor agrega algunas caracter&iacute;sticas sobre el &iacute;tem
-                button.btn.btn-success.btn-lg.btn-block Guardar            
+                button.btn.btn-success.btn-lg.btn-block(type='submit') Guardar            
 

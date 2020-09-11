@@ -25,9 +25,47 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('#ItemCode').change(updatedValue);
   function updatedValue(e) {
-    $.getJSON("http://localhost:3000/lookup/" + e.target.value, item => {      
+    $.getJSON("http://localhost:3000/lookup/" + e.target.value, item => {
       $('#ItemName').val(item[0]['name']);
-    }, err => { console.log(err); });
+    }, err => {
+      console.log(err);
+    });
   }
 });
+
+function sendData() {
+    
+  if (document.getElementById('Form').checkValidity() == true) {
+    $.post(
+      '/items/add',
+      $('#Form').serializeArray(),
+      function(data,status){
+        if(status=='success'){
+          //aqui va un spiner
+          if(data=='registrado'){
+            $.notify(
+            'Se registro correctamente',
+            {
+              className: 'success',
+              globalPosition: 'top',
+              autoHideDelay: 7000
+            });
+          }else{
+            $.notify(
+              'Hubo un error: '+data,
+              {
+                className: 'error',
+                globalPosition: 'top',
+                autoHideDelay: 7000
+              });
+          }  
+          
+        }else{
+          alert('no me respondió');
+        }
+      }
+    )
+
+  }
+}
 

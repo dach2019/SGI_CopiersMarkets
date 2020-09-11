@@ -19,9 +19,11 @@ exports.postAdd=(req,res)=>{
     };
     Item.create(newItem).then(item=>{
         
-        res.redirect('/items');
+        res.send('registrado');
+        
     }).catch(error=>{
         console.error(error);
+        res.send("error").status(500);
     });
 
 };

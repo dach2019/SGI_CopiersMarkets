@@ -23,10 +23,16 @@ module.exports=function(){
     router.get('/general',main.general);
     router.get('/admins',main.admins);
 
+    //Items
+        //GET
     router.get('/items/add',items.getAdd);
     router.get('/items/search',items.getSearch);
+    router.get('/items/edit/:code',items.getEdit);
+        //POST
     router.post('/items/add',items.postAdd);
+    router.post('/items/edit/:code',items.postEdit);
 
+    //Referrals
     router.get('/referrals/add',referrals.getAdd);
     router.post('/referrals/add',referrals.postAdd);
 

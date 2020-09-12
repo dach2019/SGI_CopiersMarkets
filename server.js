@@ -34,7 +34,7 @@ app.use((req,res,next)=>{
 });
 
 //Public
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,'public')));
 
 //Start app
 app.listen(app.get('port'), function() {

@@ -21,11 +21,10 @@ $(document).ready(function () {
   }, false);
 })();
 
-
 $(document).ready(function () {
   $('#ItemCode').change(updatedValue);
   function updatedValue(e) {
-    $.getJSON("http://localhost:3000/lookup/" + e.target.value, item => {
+    $.getJSON("/lookup/" + e.target.value, item => {
       $('#ItemName').val(item[0]['name']);
     }, err => {
       console.log(err);
@@ -37,14 +36,14 @@ function sendData() {
 
   if (document.getElementById('Form').checkValidity() == true) {
     $.post(
-      '/items/add',
+      $(location).attr("href"),
       $('#Form').serializeArray(),
       function (data, status) {
         if (status == 'success') {
           //aqui va un spiner
-          if (data == 'registrado') {
+          if (data['status'] == 'success') {
             $.notify(
-              'Se registro correctamente',
+              data['message'],
               {
                 className: 'success',
                 globalPosition: 'top',
@@ -52,10 +51,13 @@ function sendData() {
               });
             $('#Form').trigger("reset");
             document.getElementById('Form').classList.remove('was-validated');
+            if (data['redirect']!=''){
+              location.replace(data['redirect']);
+            }
             
           } else {
             $.notify(
-              'Hubo un error: ' + data,
+                'Hubo un error: '+data['message'],
               {
                 className: 'error',
                 globalPosition: 'top',

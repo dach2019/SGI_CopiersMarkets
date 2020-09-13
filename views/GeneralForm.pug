@@ -4,40 +4,41 @@ block main
 
     .container.bg-light.rounded.m-0.p-0.mx-auto(style="width:100%; max-width:500px")
         .container.bg-primary.text-light.m-0.p-3.rounded-top
-            h4.m-0 Agregar Usuario general
+            -let title=mode+' Usuario general'
+            h4.m-0=title
         .container.m-0.p-3
-            form.form.needs-validation(novalidate='' action="/general/add" method="POST")
+            form.form.needs-validation(id='Form' novalidate='' action='javascript:sendData();')
                 .form-row
                     .col-md.mb-3
                         label Id. Usuario:
-                        input.form-control(name='id' type='text' required='')
+                        input.form-control(name='id' type='text' value=id required='')
                         .invalid-feedback
                             | Por favor inserta el id del usuario
                     .col-md.mb-3
                         label Nombre:
-                        input.form-control(name='name' type='text' required='')
+                        input.form-control(name='name' type='text' value=name required='')
                         .invalid-feedback
                             | Por favor inserta el nombre del usuario
                 .form-row
                     .col-md.mb-3
                         label Cargo:
-                        input.form-control(name='position' type='text' required='')
+                        input.form-control(name='position' type='text' value=position required='')
                         .invalid-feedback
                             | Por favor inserta el cargo del usuario
                     .col-md.mb-3
                         label Tel&eacute;fono:
-                        input.form-control(name='phone' type='number' required='')
+                        input.form-control(name='phone' type='number' value=phone required='')
                         .invalid-feedback
                             | Por favor inserta el n&uacute;mero de telefono del usuario
                 .form-row
                     .col-md.mb-3
                         label Correo:
-                        input.form-control(name='email' type='text' required='')
+                        input.form-control(name='email' type='text' value=email required='')
                         .invalid-feedback
                             | Por favor inserta el correo electr&oacute;nico del usuario
                     .col-md.mb-3
                         label Contrase&ntilde;a:
-                        input.form-control(name='password' type='password' required='')
+                        input.form-control(name='password' type='password' value=password required='')
                         .invalid-feedback
                             | Por favor inserta una contrase&ntilde;a inicial para el usuario
                 button.btn.btn-success.btn-lg.btn-block(type='submit') Guardar

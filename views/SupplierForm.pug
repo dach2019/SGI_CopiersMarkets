@@ -4,44 +4,45 @@ block main
 
     .container.bg-light.rounded.m-0.p-0.mx-auto(style="width:100%; max-width:500px")
         .container.bg-primary.text-light.m-0.p-3.rounded-top
-            h4.m-0 Agregar Proveedor
+            -let title=mode+' Proveedor'
+            h4.m-0=title
         .container.m-0.p-3
-            form.form.needs-validation(novalidate='' action='/suppliers/add' method='POST')
+            form.form.needs-validation(id='Form' novalidate='' action='javascript:sendData();')
                 .form-row
                     .col-md.mb-3
                         label Nit/CC:
-                        input.form-control(name='id' type='text' required='')
+                        input.form-control(name='id' type='text' value=id required='')
                         .invalid-feedback
                             | Por favor inserta la identificaci&oacute;n del proveedor
                     .col-md.mb-3
                         label Raz&oacute;n social:
-                        input.form-control(name='name' type='text' required='')
+                        input.form-control(name='name' type='text' value=name required='')
                         .invalid-feedback
                             | Por favor inserta la raz&oacute;n social del proveedor
                 .form-row
                     .col-md.mb-3
                         label Contacto:
-                        input.form-control(name='contact' type='text' required='')
+                        input.form-control(name='contact' type='text' value=contact required='')
                         .invalid-feedback
                             | Por favor inserta el nombre de la persona de contacto
                     .col-md.mb-3
                         label Tel&eacute;fono:
-                        input.form-control(name='phone' type='number' required='')
+                        input.form-control(name='phone' type='number' value=phone required='')
                         .invalid-feedback
                             | Por favor inserta el n&uacute;mero de telefono del proveedor
                 .form-row
                     .col-md.mb-3
                         label Direcci&oacute;n:
-                        input.form-control(name='address' type='text' required='')
+                        input.form-control(name='address' type='text' value=address required='')
                         .invalid-feedback
                             | Por favor inserta la direcci&oacute;n del proveedor
                     .col-md.mb-3
                         label Correo:
-                        input.form-control(name='email' type='text' required='')
+                        input.form-control(name='email' type='text' value=email required='')
                         .invalid-feedback
                             | Por favor inserta el correo electr&oacute;nico del proveedor
                 .form-group
                     label Observaciones:
-                    textarea.form-control(name='obs' rows='3')
+                    textarea.form-control(name='obs' rows='3')=obs
 
                 button.btn.btn-success.btn-lg.btn-block(type='submit') Guardar

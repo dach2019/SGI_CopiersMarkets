@@ -4,9 +4,10 @@ block main
 
     .container.bg-light.rounded.m-0.p-0.mx-auto(style="width:100%; max-width:500px")
         .container.bg-primary.text-light.m-0.p-3.rounded-top
-            h4.m-0 Agregar Orden de pedido
+            -let title=mode+' Orden de pedido'
+            h4.m-0=title
         .container.m-0.p-3
-            form.form.needs-validation(novalidate='' action='/orders/add' method='POST')
+            form.form.needs-validation(id='Form' novalidate='' action='javascript:sendData();')
                 .form-row
                     .col-md.mb-3
                         label No. Pedido:
@@ -18,28 +19,28 @@ block main
                     .col-md.mb-3
                         label C&oacute;digo:
                         select.form-control(id="ItemCode" name="code" type='text' required='')
-                            option(selected='')
+                            option(selected)=code
                             each item in items
                                     option=item['code']
                         .invalid-feedback
                             | Por favor inserta el c&oacute;digo del &iacute;tem
                     .col-md.mb-3
                         label Nombre:
-                        input.form-control(id="ItemName" name="name"  type='text' readonly)
+                        input.form-control(id="ItemName" name="name" value=name  type='text' readonly)
                 .form-row
                     .col-md.mb-3
                         label Cantidad:
-                        input.form-control(type='number' name="quantity" required='')
+                        input.form-control(type='number' name="quantity" value=quantity required='')
                         .invalid-feedback
                             | Por favor inserta la cantidad del &iacute;tem que se va a pedir
                 .form-row
                     .col-md.mb-3
                         label Fecha de cierre:
-                        input.form-control(type='date' readonly)
+                        input.form-control(type='date' value=closeDate readonly)
                     .col-md.mb-3
                         label Estado:
-                        input.form-control(name='status' type='text' value="Creada" readonly)
+                        input.form-control(name='status' type='text' value=status readonly)
                 .form-group
                     label Observaciones:
-                    textarea.form-control(name='obs' rows='3')
+                    textarea.form-control(name='obs' rows='3')=obs
                 button.btn.btn-success.btn-lg.btn-block(type='submit') Guardar

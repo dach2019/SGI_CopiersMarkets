@@ -46,7 +46,7 @@ function sendData() {
               data['message'],
               {
                 className: 'success',
-                globalPosition: 'top',
+                globalPosition: 'bottom',
                 autoHideDelay: 7000
               });
             $('#Form').trigger("reset");
@@ -60,7 +60,7 @@ function sendData() {
                 'Hubo un error: '+data['message'],
               {
                 className: 'error',
-                globalPosition: 'top',
+                globalPosition: 'bottom',
                 autoHideDelay: 7000
               });
           }

@@ -1,7 +1,6 @@
 const Item = require('../models/Item');
 const pug = require('pug');
 
-
 exports.getAdd = (req, res) => {
     const templateCompiller = pug.compileFile('./views/ItemForm.pug');
     res.send(templateCompiller({
@@ -27,7 +26,6 @@ exports.postAdd = (req, res) => {
             '/items'
         )
         );
-
     }).catch(error => {
         console.log(error);
         let message = 'error: ' + error.parent.code;

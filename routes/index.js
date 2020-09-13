@@ -33,24 +33,60 @@ module.exports=function(){
     router.post('/items/edit/:code',items.postEdit);
 
     //Referrals
+        //GET
     router.get('/referrals/add',referrals.getAdd);
+    router.get('/referrals/search',referrals.getSearch);
+    router.get('/referrals/edit/:number',referrals.getEdit);
+        //POST
     router.post('/referrals/add',referrals.postAdd);
+    router.post('/referrals/edit/:number',referrals.postEdit);
 
+    //Notes
+        //GET
     router.get('/notes/add',notes.getAdd);
+    router.get('/notes/search',notes.getSearch);
+    router.get('/notes/edit/:number',notes.getEdit);
+        //POST
     router.post('/notes/add',notes.postAdd);
+    router.post('/notes/edit/:number',notes.postEdit);
 
+    //Orders
+        //GET
     router.get('/orders/add',orders.getAdd);
+    router.get('/orders/search',orders.getSearch);
+    router.get('/orders/edit/:number',orders.getEdit);
+        //POST
     router.post('/orders/add',orders.postAdd);
+    router.post('/orders/edit/:number',orders.postEdit);
 
+    //Suppliers
+        //GET
     router.get('/suppliers/add',suppliers.getAdd);
+    router.get('/suppliers/search',suppliers.getSearch);
+    router.get('/suppliers/edit/:id',suppliers.getEdit);
+        //POST
     router.post('/suppliers/add',suppliers.postAdd);
-
+    router.post('/suppliers/edit/:id',suppliers.postEdit);
+    
+    //General
+        //GET
     router.get('/general/add',general.getAdd);
+    router.get('/general/search',general.getSearch);
+    router.get('/general/edit/:id',general.getEdit);
+        //POST
     router.post('/general/add',general.postAdd);
-
+    router.post('/general/edit/:id',general.postEdit);
+    
+    //Admin
+        //GET
     router.get('/admins/add',admins.getAdd);
+    router.get('/admins/search',admins.getSearch);
+    router.get('/admins/edit/:id',admins.getEdit);
+        //POST
     router.post('/admins/add',admins.postAdd);
+    router.post('/admins/edit/:id',admins.postEdit);
 
+    //Lookup
     router.get('/lookup/:code',items.getLookup);
     
     return router;

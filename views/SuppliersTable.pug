@@ -5,25 +5,27 @@ block main
     table.table.bg-light.table-bordered.table-hover.table-responsive-md
         thead.thead-light
             tr
-                th(scope='col') C&oacute;digo
-                th(scope='col') Tipo
-                th(scope='col') Nombre
-                th(scope='col') Nivel de seguridad
-                th(scope='col') Cantidad
-                th(scope='col') Especificaciones
+                th(scope='col') CC/NIT
+                th(scope='col') Raz&oacute;n social
+                th(scope='col') Contacto
+                th(scope='col') Telefono
+                th(scope='col') Correo
+                th(scope='col') Direcci&oacute;n
+                th(scope='col') Observaciones
                 th(scope='col') Acciones
         tbody
-            each item in items
+            each supplier in suppliers
                 tr
-                    td #{item.code}
-                    td #{item.type}
-                    td #{item.name}
-                    td #{item.secstock}
-                    td #{item.stock}
-                    td #{item.specs}
+                    td #{supplier.id}
+                    td #{supplier.name}
+                    td #{supplier.contact}
+                    td #{supplier.phone}
+                    td #{supplier.email}
+                    td #{supplier.address}
+                    td #{supplier.obs}
                     td 
-                        -let route='/items/edit/'+item.code
-                        a(id=item.code class='btn btn-warning search' href=route role='button')
+                        -let route='/suppliers/edit/'+supplier.id
+                        a(id=supplier.id class='btn btn-warning search' href=route role='button')
                             svg.bi.bi-pencil-square(width='1em' height='1em' viewbox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg')
                                 path(d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z')
                                 path(fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z')

@@ -1,5 +1,6 @@
 const express = require('express');
 const router=express.Router();
+const passport=require('passport');
 
 const main=require('../controllers/main');
 const items=require('../controllers/items');
@@ -7,87 +8,105 @@ const referrals=require('../controllers/referrals');
 const notes=require('../controllers/notes');
 const orders=require('../controllers/orders');
 const suppliers=require('../controllers/suppliers');
-const general=require('../controllers/general');
-const admins=require('../controllers/admins');
-
+const users=require('../controllers/users');
 
 module.exports=function(){
+
+    //Test
     router.get('/ping',main.ping);
-    router.get('/',main.index);
-    router.get('/main',main.main);
-    router.get('/items',main.items);
-    router.get('/referrals',main.referrals);
-    router.get('/notes',main.notes);
-    router.get('/orders',main.orders);
-    router.get('/suppliers',main.suppliers);
-    router.get('/general',main.general);
-    router.get('/admins',main.admins);
+
+    //Login
+    router.get('/login',main.getLogin);
+    router.post('/login',passport.authenticate('local-login',{
+        successRedirect:'/main',
+        failureRedirect:'/login',
+        passReqToCallback:true
+    }));
+    
+    //Logout
+    router.get('/logout',main.getLogout);
+
+    //Main
+    router.get('/',isAuthenticated,main.main);
+    router.get('/main',isAuthenticated,main.main);
+    router.get('/items',isAuthenticated,main.items);
+    router.get('/referrals',isAuthenticated,main.referrals);
+    router.get('/notes',isAuthenticated,main.notes);
+    router.get('/orders',isAuthenticated,main.orders);
+    router.get('/suppliers',isAuthenticated,main.suppliers);
+    router.get('/users',isAuthenticated,isAllowed,main.users);
 
     //Items
         //GET
-    router.get('/items/add',items.getAdd);
-    router.get('/items/search',items.getSearch);
-    router.get('/items/edit/:code',items.getEdit);
+    router.get('/items/add',isAuthenticated,items.getAdd);
+    router.get('/items/search',isAuthenticated,items.getSearch);
+    router.get('/items/edit/:code',isAuthenticated,items.getEdit);
         //POST
-    router.post('/items/add',items.postAdd);
-    router.post('/items/edit/:code',items.postEdit);
+    router.post('/items/add',isAuthenticated,items.postAdd);
+    router.post('/items/edit/:code',isAuthenticated,items.postEdit);
 
     //Referrals
         //GET
-    router.get('/referrals/add',referrals.getAdd);
-    router.get('/referrals/search',referrals.getSearch);
-    router.get('/referrals/edit/:number',referrals.getEdit);
+    router.get('/referrals/add',isAuthenticated,referrals.getAdd);
+    router.get('/referrals/search',isAuthenticated,referrals.getSearch);
+    router.get('/referrals/edit/:number',isAuthenticated,referrals.getEdit);
         //POST
-    router.post('/referrals/add',referrals.postAdd);
-    router.post('/referrals/edit/:number',referrals.postEdit);
+    router.post('/referrals/add',isAuthenticated,referrals.postAdd);
+    router.post('/referrals/edit/:number',isAuthenticated,referrals.postEdit);
 
     //Notes
         //GET
-    router.get('/notes/add',notes.getAdd);
-    router.get('/notes/search',notes.getSearch);
-    router.get('/notes/edit/:number',notes.getEdit);
+    router.get('/notes/add',isAuthenticated,notes.getAdd);
+    router.get('/notes/search',isAuthenticated,notes.getSearch);
+    router.get('/notes/edit/:number',isAuthenticated,notes.getEdit);
         //POST
-    router.post('/notes/add',notes.postAdd);
-    router.post('/notes/edit/:number',notes.postEdit);
+    router.post('/notes/add',isAuthenticated,notes.postAdd);
+    router.post('/notes/edit/:number',isAuthenticated,notes.postEdit);
 
     //Orders
         //GET
-    router.get('/orders/add',orders.getAdd);
-    router.get('/orders/search',orders.getSearch);
-    router.get('/orders/edit/:number',orders.getEdit);
+    router.get('/orders/add',isAuthenticated,orders.getAdd);
+    router.get('/orders/search',isAuthenticated,orders.getSearch);
+    router.get('/orders/edit/:number',isAuthenticated,orders.getEdit);
         //POST
-    router.post('/orders/add',orders.postAdd);
-    router.post('/orders/edit/:number',orders.postEdit);
+    router.post('/orders/add',isAuthenticated,orders.postAdd);
+    router.post('/orders/edit/:number',isAuthenticated,orders.postEdit);
 
     //Suppliers
         //GET
-    router.get('/suppliers/add',suppliers.getAdd);
-    router.get('/suppliers/search',suppliers.getSearch);
-    router.get('/suppliers/edit/:id',suppliers.getEdit);
+    router.get('/suppliers/add',isAuthenticated,suppliers.getAdd);
+    router.get('/suppliers/search',isAuthenticated,suppliers.getSearch);
+    router.get('/suppliers/edit/:id',isAuthenticated,suppliers.getEdit);
         //POST
-    router.post('/suppliers/add',suppliers.postAdd);
-    router.post('/suppliers/edit/:id',suppliers.postEdit);
+    router.post('/suppliers/add',isAuthenticated,suppliers.postAdd);
+    router.post('/suppliers/edit/:id',isAuthenticated,suppliers.postEdit);
     
-    //General
+    //Users
         //GET
-    router.get('/general/add',general.getAdd);
-    router.get('/general/search',general.getSearch);
-    router.get('/general/edit/:id',general.getEdit);
+    router.get('/users/add',isAuthenticated,isAllowed,users.getAdd);
+    router.get('/users/search',isAuthenticated,isAllowed,users.getSearch);
+    router.get('/users/edit/:id',isAuthenticated,isAllowed,users.getEdit);
         //POST
-    router.post('/general/add',general.postAdd);
-    router.post('/general/edit/:id',general.postEdit);
-    
-    //Admin
-        //GET
-    router.get('/admins/add',admins.getAdd);
-    router.get('/admins/search',admins.getSearch);
-    router.get('/admins/edit/:id',admins.getEdit);
-        //POST
-    router.post('/admins/add',admins.postAdd);
-    router.post('/admins/edit/:id',admins.postEdit);
+    router.post('/users/add',isAuthenticated,isAllowed,users.postAdd);
+    router.post('/users/edit/:id',isAuthenticated,isAllowed,users.postEdit);
 
     //Lookup
-    router.get('/lookup/:code',items.getLookup);
+    router.get('/lookup/:code',isAuthenticated,items.getLookup);
     
+    function isAuthenticated(req,res,next){
+        if(req.user){
+            return next();
+        }
+        res.redirect('/login');
+    };
+
+    function isAllowed(req,res,next){
+        console.log(req.user);
+        if(req.user['dataValues']['type']=='Administrador'){
+            return next();
+        }
+        res.redirect('/main')
+    };
+
     return router;
 }

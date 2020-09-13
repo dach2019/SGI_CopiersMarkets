@@ -4,12 +4,12 @@ block header
     //-home
     div(id="home", class="row m-0 justify-content-center")
         //-login form
-        form(id="loginForm", action="main", class="bg-dark-50 align-self-center shadow-lg")
+        form(action="/login" method='POST' class="bg-dark-50 align-self-center shadow-lg")
             lottie-player(src="https://assets2.lottiefiles.com/packages/lf20_xNLzvp.json", background="transparent", speed="0.7", style="width: 100%;height:200px;", loop autoplay)
             div.form-group
-                input(type="text", class="form-control", placeholder="Ingresa tu usuario", id="inUsuario")
+                input(type="text", class="form-control", placeholder="Ingresa tu usuario", name='username')
             div.form-group
-                input(type="password", class="form-control", placeholder="Ingresa tu contraseña", id="pwd")
+                input(type="password", class="form-control", placeholder="Ingresa tu contraseña", name="password")
             button(type="submit", class="btn btn-block btn-primary font-weight-bold") Ingresar
         
 

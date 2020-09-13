@@ -1,8 +1,13 @@
 const {Model, Datatypes, DataTypes} = require('sequelize');
 const sequelize = require('../database/db');
+const bcrypt=require('bcryptjs');
 
-class Admin extends Model {}
-Admin.init({
+class User extends Model {
+    comparePassword (password){
+        return bcrypt.compareSync(password,this.password);
+    };
+}
+User.init({
     id: {
         type: DataTypes.STRING,
         primaryKey: true,
@@ -16,7 +21,7 @@ Admin.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    name: {
+    type: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -35,7 +40,12 @@ Admin.init({
 
 },{
     sequelize,
-    modelName: "admin"
+    modelName: "user"
 })
 
-module.exports= Admin;
+User.encryptPassword=function (password){
+    return bcrypt.hashSync(password,bcrypt.genSaltSync(10));
+};
+
+
+module.exports= User;

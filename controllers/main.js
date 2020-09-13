@@ -1,10 +1,16 @@
+const passport=require('passport');
 
 exports.ping=(req,res)=>{
     res.send("pong");
 };
 
-exports.index=(req,res)=>{
-    res.render("index");
+exports.getLogin=(req,res)=>{
+    res.render("login");
+};
+
+exports.getLogout=(req,res)=>{
+    req.logout();
+    res.redirect("/login");
 };
 
 exports.main=(req,res)=>{
@@ -31,10 +37,6 @@ exports.suppliers=(req,res)=>{
     res.render("suppliers");
 };
 
-exports.general=(req,res)=>{
-    res.render("general");
-};
-
-exports.admins=(req,res)=>{
-    res.render("admins");
+exports.users=(req,res)=>{
+    res.render("users");
 };

@@ -8,20 +8,22 @@ block main
                 th(scope='col') Id.
                 th(scope='col') Nombre
                 th(scope='col') Cargo
+                th(scope='col') Tipo
                 th(scope='col') Telefono
                 th(scope='col') Correo
                 th(scope='col') Acciones
         tbody
-            each general in generals
+            each user in users
                 tr
-                    td #{general.id}
-                    td #{general.name}
-                    td #{general.position}
-                    td #{general.phone}
-                    td #{general.email}
+                    td #{user.id}
+                    td #{user.name}
+                    td #{user.position}
+                    td #{user.type}
+                    td #{user.phone}
+                    td #{user.email}
                     td 
-                        -let route='/general/edit/'+general.id
-                        a(id=general.id class='btn btn-warning search' href=route role='button')
+                        -let route='/users/edit/'+user.id
+                        a(id=user.id class='btn btn-warning search' href=route role='button')
                             svg.bi.bi-pencil-square(width='1em' height='1em' viewbox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg')
                                 path(d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z')
                                 path(fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z')

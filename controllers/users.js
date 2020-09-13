@@ -1,8 +1,8 @@
-const General=require('../models/General');
+const User=require('../models/User');
 const pug = require('pug');
 
 exports.getAdd = (req, res) => {
-    const templateCompiller = pug.compileFile('./views/GeneralForm.pug');
+    const templateCompiller = pug.compileFile('./views/UserForm.pug');
     res.send(templateCompiller({
         mode: 'Agregar'
     }));
@@ -10,20 +10,22 @@ exports.getAdd = (req, res) => {
 
 exports.postAdd = (req, res) => {
     console.log(req.body);
-    const {id,name,position,phone,email,password}=req.body;
-    const newGeneral={
+    let {id,name,position,type,phone,email,password}=req.body;
+    password=User.encryptPassword(password);
+    const newUser={
         id,
         name,
         position,
+        type,
         phone,
         email,
         password
     };
-    General.create(newGeneral).then(general => {
+    User.create(newUser).then(user => {
         res.send(response(
             'success',
-            'El usuario ' + general.name + ' ha sido registrado con éxito.',
-            '/general'
+            'El usuario ' + user.name + ' ha sido registrado con éxito.',
+            '/users'
         )
         );
     }).catch(error => {
@@ -44,11 +46,11 @@ exports.postAdd = (req, res) => {
 };
 
 exports.getSearch = (req, res) => {
-    const templateCompiller = pug.compileFile('./views/GeneralTable.pug');
-    General.findAll().then(generals => {
+    const templateCompiller = pug.compileFile('./views/UsersTable.pug');
+    User.findAll().then(users => {
         res.send(templateCompiller(
             {
-                generals: generals
+                users: users
             }));
     }
     ).catch(error => {
@@ -57,18 +59,19 @@ exports.getSearch = (req, res) => {
 };
 
 exports.getEdit = (req, res) => {
-    const templateCompiller = pug.compileFile('./views/GeneralForm.pug');
+    const templateCompiller = pug.compileFile('./views/UserForm.pug');
     console.log(req.params.id);
-    General.findAll({ where: { 'id': req.params.id } }).then(general => {
+    User.findAll({ where: { 'id': req.params.id } }).then(user => {
         res.send(templateCompiller(
             {
                 mode: 'Editar',
-                id: general[0].id,
-                name: general[0].name,
-                position: general[0].position,
-                phone: general[0].phone,
-                email: general[0].email,
-                password: general[0].password
+                id: user[0].id,
+                name: user[0].name,
+                position: user[0].position,
+                type: user[0].type,
+                phone: user[0].phone,
+                email: user[0].email,
+                password: user[0].password
             }));
     }
     ).catch(error => {
@@ -78,20 +81,22 @@ exports.getEdit = (req, res) => {
 
 exports.postEdit = (req, res) => {
     console.log(req.body);
-    const {id,name,postion,phone,email,password}=req.body;
-    const updateGeneral={
+    const {id,name,postion,type,phone,email,password}=req.body;
+    let updateUser={
         id,
         name,
         postion,
+        type,
         phone,
         email,
         password
     };
-    General.update(updateGeneral, { where: { id: req.params.id } }).then(general=> {
+    password=User.encryptPassword(password);
+    User.update(updateUser, { where: { id: req.params.id } }).then(user=> {
         res.send(response(
             'success',
-            'Usuario general actualizado con éxito.',
-            '/general/search')
+            'Usuario actualizado con éxito.',
+            '/users/search')
         );
 
     }).catch(error => {
@@ -99,7 +104,7 @@ exports.postEdit = (req, res) => {
         let message = 'error: ' + error.parent.id;
         switch (error.parent.errno) {
             case 1062:
-                message = 'no se pudo actualizar el usuario general, debido a que ya existe uno con la misma identificación.';
+                message = 'no se pudo actualizar el usuario, debido a que ya existe uno con la misma identificación.';
                 break;
         }
         res.send(response(

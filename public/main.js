@@ -1,4 +1,20 @@
 $(document).ready(function () {
+  $.notify.addStyle('success', {
+    html: "<div><div class='alert alert-success' role='alert'><div class='title' data-notify-text='message'/></div></div></div>",
+    classes: {
+      base: {
+          "width":"100%"
+      }
+    }
+  });
+  $.notify.addStyle('error', {
+    html: "<div><div class='alert alert-danger' role='alert'><div class='title' data-notify-text='message'/></div></div></div>",
+    classes: {
+      base: {
+          "width":"100%"
+      }
+    }
+  });
   $('#sidebarCollapse').on('click', function () {
     $('#sidebar').toggleClass('active');
     $(this).toggleClass('active');
@@ -39,13 +55,12 @@ function sendData() {
       $(location).attr("href"),
       $('#Form').serializeArray(),
       function (data, status) {
-        if (status == 'success') {
-          //aqui va un spiner
+        if (status == 'success') {  
           if (data['status'] == 'success') {
-            $.notify(
-              data['message'],
+            $.notify({
+              message:data['message']},
               {
-                className: 'success',
+                style: 'success',
                 globalPosition: 'bottom',
                 autoHideDelay: 7000
               });
@@ -56,17 +71,23 @@ function sendData() {
             }
             
           } else {
-            $.notify(
-                'Hubo un error: '+data['message'],
+            $.notify({
+                message:'Hubo un error: '+data['message']},
               {
-                className: 'error',
+                style: 'error',
                 globalPosition: 'bottom',
                 autoHideDelay: 7000
               });
           }
 
         } else {
-          alert('no me respondió');
+          $.notify({
+            message:'Hubo un error: '+data},
+          {
+            style: 'error',
+            globalPosition: 'bottom',
+            autoHideDelay: 7000
+          });
         }
       }
     )

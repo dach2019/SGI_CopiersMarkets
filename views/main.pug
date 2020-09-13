@@ -11,30 +11,28 @@ block header
                     a.dropdown-toggle(href='#InventorySubmenu' data-toggle='collapse' aria-expanded='false') Inventarios
                     ul#InventorySubmenu.collapse.list-unstyled
                         li
-                            a#Items(href="/items") Items 
+                            a(href="/items") Items 
                         li
-                            a#Referrals(href="/referrals") Remisiones
+                            a(href="/referrals") Remisiones
                         li
-                            a#Notes(href="/notes") Notas
+                            a(href="/notes") Notas
                 li
                     a.dropdown-toggle(href='#OrdersSubmenu' data-toggle='collapse' aria-expanded='false') Pedidos
                     ul#OrdersSubmenu.collapse.list-unstyled
                         li
-                            a#Orders(href="/orders") Ordenes
+                            a(href="/orders") Ordenes
                         li
-                            a#Suppliers(href="/suppliers") Proveedores
+                            a(href="/suppliers") Proveedores
                 li
                     a.dropdown-toggle(href='#UsersSubmenu' data-toggle='collapse' aria-expanded='false') Usuarios
                     ul#UsersSubmenu.collapse.list-unstyled
                         li
-                            a#General(href="/general") General
-                        li
-                            a#Admins(href="/admins") Admins
+                            a(href="/users") Usuarios
                 li
                     a#Help.sb-options Ayuda
             ul.list-unstyled.CTAs
                 li
-                    a.exit(href='index.html') Cerrar sesi&oacute;n
+                    a.exit(href='/logout') Cerrar sesi&oacute;n
         // Content
         #content.bg-dark.p-3
             // Sidebar button

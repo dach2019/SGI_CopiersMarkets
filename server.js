@@ -5,28 +5,33 @@ const morgan=require('morgan');
 const path=require('path');
 const sequelize=require('./database/db');
 const urlencodedParser=bodyParser.urlencoded({extended:false})
-require('./models/Associations');
+const passport=require('passport');
+const session=require('express-session');
 
 //Init app
 const app = express();
+require('./models/Associations');
+require('./passport/local-auth')
 
 //Settings
 app.set('port',process.env.PORT||3000);
 app.set('view engine','pug');
 
-
 //Views
 app.set('views',path.join(__dirname,"./views"));
 
-//Routes
-app.use('/',urlencodedParser,routes());
-
-
 //Middlewares
 app.use(morgan('dev'));
-/*app.use(express.urlencoded({extended:false}));
-app.use(express.json());
-*/
+app.use(session({
+    secret: 'secret123',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Routes
+app.use('/',urlencodedParser,routes());
 
 //Global variables
 app.use((req,res,next)=>{

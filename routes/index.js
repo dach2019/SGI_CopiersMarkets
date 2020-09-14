@@ -94,18 +94,20 @@ module.exports=function(){
     router.get('/lookup/:code',isAuthenticated,items.getLookup);
     
     function isAuthenticated(req,res,next){
-        if(req.user){
+        /*if(req.user){
             return next();
         }
-        res.redirect('/login');
+        res.redirect('/login');*/
+	return next();
     };
 
     function isAllowed(req,res,next){
         console.log(req.user);
-        if(req.user['dataValues']['type']=='Administrador'){
+        /*if(req.user['dataValues']['type']=='Administrador'){
             return next();
         }
-        res.redirect('/main')
+        res.redirect('/main')*/
+	return next();
     };
 
     return router;

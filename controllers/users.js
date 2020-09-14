@@ -81,8 +81,8 @@ exports.getEdit = (req, res) => {
 
 exports.postEdit = (req, res) => {
     console.log(req.body);
-    const {id,name,postion,type,phone,email,password}=req.body;
-    let updateUser={
+    let {id,name,postion,type,phone,email,password}=req.body;
+    const updateUser={
         id,
         name,
         postion,

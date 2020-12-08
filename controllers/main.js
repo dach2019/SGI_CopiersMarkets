@@ -14,7 +14,7 @@ exports.getLogout=(req,res)=>{
 };
 
 exports.main=(req,res)=>{
-    res.render("main");
+    res.render("home");
 };
 
 exports.items=(req,res)=>{

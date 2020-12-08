@@ -1,0 +1,41 @@
+extends main
+
+block main
+    .row.row-cols-1.row-cols-md-3
+        .col.mb-3
+            .card
+                img.card-img-top(src='/img/items.png' alt='...')
+                .card-body
+                    a.btn.btn-primary.btn-lg.btn-block(href="/items" role="button")
+                        | Ítems
+        .col.mb-3
+            .card
+                img.card-img-top(src='/img/referrals.png' alt='...')
+                .card-body
+                    a.btn.btn-primary.btn-lg.btn-block(href="/referrals" role="button")
+                        | Remisiones
+        .col.mb-3
+            .card
+                img.card-img-top(src='/img/notes.png' alt='...')
+                .card-body
+                    a.btn.btn-primary.btn-lg.btn-block(href="/notes" role="button")
+                        | Notas de inventario
+    .row.row-cols-1.row-cols-md-3
+        .col.mb-3
+            .card
+                img.card-img-top(src='/img/orders.png' alt='...')
+                .card-body
+                    a.btn.btn-primary.btn-lg.btn-block(href="/orders" role="button")
+                        | Ordenes de pedido
+        .col.mb-3
+            .card
+                img.card-img-top(src='/img/suppliers.png' alt='...')
+                .card-body
+                    a.btn.btn-primary.btn-lg.btn-block(href="/suppliers" role="button")
+                        | Proveedores
+        .col.mb-3
+            .card
+                img.card-img-top(src='/img/users.png' alt='...')
+                .card-body
+                    a.btn.btn-primary.btn-lg.btn-block(href="/users" role="button")
+                        | Usuarios

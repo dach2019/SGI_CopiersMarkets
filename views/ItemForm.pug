@@ -34,9 +34,12 @@ block main
                             | Por favor inserta el nivel de seguridad de el &iacute;tem
                     .col-md.mb-3
                         label Cantidad:
-                        input.form-control(name="stock" value=stock type='number' required='')
-                        .invalid-feedback
-                            | Por favor inserta la cantidad actual del &iacute;tem
+                        if stock>=0
+                            input.form-control(name="stock" value=stock type='number' readonly)
+                        else
+                            input.form-control(name="stock" value=stock type='number' required='')
+                            .invalid-feedback
+                                | Por favor inserta la cantidad actual del &iacute;tem
                 .form-group
                     label Especificaciones:
                     textarea.form-control(name="specs" rows='3' required='')=specs

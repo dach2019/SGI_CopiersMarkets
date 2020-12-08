@@ -71,7 +71,6 @@ exports.getEdit = (req, res) => {
                 type: user[0].type,
                 phone: user[0].phone,
                 email: user[0].email,
-                password: user[0].password
             }));
     }
     ).catch(error => {
@@ -82,6 +81,7 @@ exports.getEdit = (req, res) => {
 exports.postEdit = (req, res) => {
     console.log(req.body);
     let {id,name,postion,type,phone,email,password}=req.body;
+    password=User.encryptPassword(password);
     const updateUser={
         id,
         name,

@@ -1,5 +1,6 @@
 const Referral = require('../models/Referral');
 const Item = require('../models/Item');
+const sequelize = require('../database/db');
 
 const pug = require('pug');
 const functions = require('../controllers/functions');
@@ -65,7 +66,7 @@ exports.postAdd = (req, res) => {
 
 exports.getSearch = (req, res) => {
     const templateCompiller = pug.compileFile('./views/ReferralsTable.pug');
-    Referral.findAll().then(referrals => {
+    Referral.findAll({order: [['number','DESC']]}).then(referrals => {
         res.send(templateCompiller(
             {
                 referrals: referrals
@@ -134,6 +135,36 @@ exports.postEdit = (req, res) => {
     });
 
 }
+
+exports.getClose = (req, res) => {
+    console.log(req.params.number);
+    Referral.findByPk(req.params.number).then(referral=>{
+        Item.findByPk(referral.code).then(item=>{
+            if (item.stock>=referral.quantity){
+                console.log("si hay");
+                let currentDate = functions.creationDate();
+                Referral.update({status: 'CERRADA',closeDate: currentDate},{where:{number: referral.number}});
+                Item.update({stock: item.stock-referral.quantity},{where: {code: item.code}});
+                res.send(
+                    response(
+                        'success',
+                        'Las unidades se han descargado del inventario exitosamente.',
+                        'search'
+                    )
+                );
+            } else{
+                console.log("No hay");
+                res.send(
+                    response(
+                        'error',
+                        'No hay suficientes unidades en inventario para cerrar la remisión.'
+                    )
+                );
+            }
+        });
+    });
+}
+
 
 
 function response(status, message, redirect) {

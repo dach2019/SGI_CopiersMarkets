@@ -4,35 +4,50 @@ block header
     .wrapper
         // Sidebar
         nav#sidebar
-            .sidebar-header
-                h3 Men&uacute;
-            ul.list-unstyled.components
+            .sidebar-header.p-3
+                a.btn.btn-dark.btn-lg.btn-block(href="/main" role="button")
+                    img.mr-3(src="/img/favicon.png" alt="HTML5 Icon" style="width:40px;height:40px;")
+                    |  Inicio
+                    
+            ul.list-unstyled.components.p-0
                 li
                     a.dropdown-toggle(href='#InventorySubmenu' data-toggle='collapse' aria-expanded='false') Inventarios
                     ul#InventorySubmenu.collapse.list-unstyled
                         li
-                            a(href="/items") Items 
+                            a(href="/items") 
+                                img.mr-3(src="/img/items.png" alt="HTML5 Icon" style="width:25px;height:25px;")
+                                |   Items 
                         li
-                            a(href="/referrals") Remisiones
+                            a(href="/referrals") 
+                                img.mr-3(src="/img/referrals.png" alt="HTML5 Icon" style="width:25px;height:25px;")
+                                |Remisiones
                         li
-                            a(href="/notes") Notas
+                            a(href="/notes") 
+                                img.mr-3(src="/img/notes.png" alt="HTML5 Icon" style="width:25px;height:25px;")
+                                |Notas
                 li
                     a.dropdown-toggle(href='#OrdersSubmenu' data-toggle='collapse' aria-expanded='false') Pedidos
                     ul#OrdersSubmenu.collapse.list-unstyled
                         li
-                            a(href="/orders") Ordenes
+                            a(href="/orders") 
+                                img.mr-3(src="/img/orders.png" alt="HTML5 Icon" style="width:25px;height:25px;")
+                                |Ordenes
                         li
-                            a(href="/suppliers") Proveedores
+                            a(href="/suppliers") 
+                                img.mr-3(src="/img/suppliers.png" alt="HTML5 Icon" style="width:25px;height:25px;")
+                                |Proveedores
                 li
                     a.dropdown-toggle(href='#UsersSubmenu' data-toggle='collapse' aria-expanded='false') Usuarios
                     ul#UsersSubmenu.collapse.list-unstyled
                         li
-                            a(href="/users") Usuarios
+                            a(href="/users") 
+                                img.mr-3(src="/img/users.png" alt="HTML5 Icon" style="width:25px;height:25px;")
+                                |Usuarios
                 li
                     a#Help.sb-options Ayuda
-            ul.list-unstyled.CTAs
-                li
-                    a.exit(href='/logout') Cerrar sesi&oacute;n
+            .sidebar-footer.p-3
+                a.btn.btn-danger.btn-lg.btn-block(href='/logout') 
+                    |Cerrar sesi&oacute;n
         // Content
         #content.bg-dark.p-3
             // Sidebar button
@@ -42,8 +57,7 @@ block header
                         span
                         span
                         span
-                h2#navBarTitle.p-2 Bienvenido
+                h2#navBarTitle.p-2
             // Dynamic Content
             #mainContent
                 block main
-                

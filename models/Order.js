@@ -21,7 +21,7 @@ Order.init({
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    CloseDate: {
+    closeDate: {
         type: DataTypes.DATEONLY,
         allowNull: true
     },

@@ -1,7 +1,7 @@
 module.exports={
     database:{
         username: "root",
-        password: "dach2020",
+        password: "",
         database: "sgi_db",
         host: "localhost"
     }

@@ -50,6 +50,7 @@ module.exports=function(){
     router.get('/referrals/add',isAuthenticated,referrals.getAdd);
     router.get('/referrals/search',isAuthenticated,referrals.getSearch);
     router.get('/referrals/edit/:number',isAuthenticated,referrals.getEdit);
+    router.get('/referrals/close/:number',isAuthenticated,referrals.getClose);
         //POST
     router.post('/referrals/add',isAuthenticated,referrals.postAdd);
     router.post('/referrals/edit/:number',isAuthenticated,referrals.postEdit);
@@ -58,16 +59,17 @@ module.exports=function(){
         //GET
     router.get('/notes/add',isAuthenticated,notes.getAdd);
     router.get('/notes/search',isAuthenticated,notes.getSearch);
-    router.get('/notes/edit/:number',isAuthenticated,notes.getEdit);
+    //router.get('/notes/edit/:number',isAuthenticated,notes.getEdit);
         //POST
     router.post('/notes/add',isAuthenticated,notes.postAdd);
-    router.post('/notes/edit/:number',isAuthenticated,notes.postEdit);
+    //router.post('/notes/edit/:number',isAuthenticated,notes.postEdit);
 
     //Orders
         //GET
     router.get('/orders/add',isAuthenticated,orders.getAdd);
     router.get('/orders/search',isAuthenticated,orders.getSearch);
     router.get('/orders/edit/:number',isAuthenticated,orders.getEdit);
+    router.get('/orders/close/:number',isAuthenticated,orders.getClose);
         //POST
     router.post('/orders/add',isAuthenticated,orders.postAdd);
     router.post('/orders/edit/:number',isAuthenticated,orders.postEdit);
@@ -94,19 +96,19 @@ module.exports=function(){
     router.get('/lookup/:code',isAuthenticated,items.getLookup);
     
     function isAuthenticated(req,res,next){
-        /*if(req.user){
+        if(req.user){
             return next();
         }
-        res.redirect('/login');*/
+        res.redirect('/login');
 	return next();
     };
 
     function isAllowed(req,res,next){
         console.log(req.user);
-        /*if(req.user['dataValues']['type']=='Administrador'){
+        if(req.user['dataValues']['type']=='Administrador'){
             return next();
         }
-        res.redirect('/main')*/
+        res.redirect('/main')
 	return next();
     };
 

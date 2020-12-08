@@ -1,4 +1,4 @@
-const Order=require('../models/Order');
+const Order = require('../models/Order');
 const Item = require('../models/Item');
 
 const pug = require('pug');
@@ -17,7 +17,7 @@ exports.getAdd = (req, res) => {
                 creationDate: currentDate,
                 items: items,
                 mode: 'Agregar',
-                status:'CREADA'
+                status: 'CREADA'
             }));
         }
         ).catch(error => {
@@ -42,7 +42,7 @@ exports.postAdd = (req, res) => {
     Order.create(newOrder).then(order => {
         res.send(response(
             'success',
-            'La orden de pedido No. ' + order.number+ ' ha sido registrada con éxito.',
+            'La orden de pedido No. ' + order.number + ' ha sido registrada con éxito.',
             '/orders'
         )
         );
@@ -55,17 +55,17 @@ exports.postAdd = (req, res) => {
                 break;
         }
         res.send(response(
-                'error',
-                message
-            )
-            
+            'error',
+            message
+        )
+
         );
     });
 };
 
 exports.getSearch = (req, res) => {
     const templateCompiller = pug.compileFile('./views/OrdersTable.pug');
-    Order.findAll().then(orders => {
+    Order.findAll({order: [['number','DESC']]}).then(orders => {
         res.send(templateCompiller(
             {
                 orders: orders
@@ -99,7 +99,7 @@ exports.getEdit = (req, res) => {
         });
     }
     ).catch(error => {
-        console.log('No se pudo obtener el listado de ordenes: '+error);
+        console.log('No se pudo obtener el listado de ordenes: ' + error);
     });
 }
 
@@ -133,6 +133,23 @@ exports.postEdit = (req, res) => {
 
 }
 
+exports.getClose = (req, res) => {
+    console.log(req.params.number);
+    Order.findByPk(req.params.number).then(order => {
+        Item.findByPk(order.code).then(item => {
+            let currentDate = functions.creationDate();
+            Order.update({ status: 'CERRADA', closeDate: currentDate }, { where: { number: order.number } });
+            Item.update({ stock: item.stock + order.quantity }, { where: { code: item.code } });
+            res.send(
+                response(
+                    'success',
+                    'Las unidades se han cargado al inventario exitosamente.',
+                    'search'
+                )
+            );
+        });
+    });
+}
 
 function response(status, message, redirect) {
     return {

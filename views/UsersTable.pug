@@ -15,7 +15,9 @@ block main
         tbody
             each user in users
                 tr
-                    td #{user.id}
+                    td
+                        h4
+                            span.badge.badge-info=user.id
                     td #{user.name}
                     td #{user.position}
                     td #{user.type}

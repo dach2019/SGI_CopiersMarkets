@@ -37,12 +37,20 @@ exports.postAdd = (req, res) => {
         reason
     };
     Note.create(newNote).then(note => {
-        res.send(response(
-            'success',
-            'La nota de inventario No. ' + note.number+ ' ha sido registrada con éxito.',
-            '/notes'
-        )
-        );
+        Item.findByPk(newNote.code).then(item=>{
+            if(newNote.type=='Entrada'){
+                Item.update({stock: item.stock+parseInt(newNote.quantity)},{where:{code: item.code}});
+            }else{
+                Item.update({stock: item.stock-parseInt(newNote.quantity)},{where:{code: item.code}});
+            }
+            res.send(response(
+                'success',
+                'La nota de inventario No. ' + note.number+ ' ha sido registrada con éxito.',
+                '/notes'
+            )
+            );
+        });
+        
     }).catch(error => {
         console.log(error);
         let message = 'error: ' + error.parent.code;
@@ -62,7 +70,7 @@ exports.postAdd = (req, res) => {
 
 exports.getSearch = (req, res) => {
     const templateCompiller = pug.compileFile('./views/NotesTable.pug');
-    Note.findAll().then(notes => {
+    Note.findAll({order: [['number','DESC']]}).then(notes => {
         res.send(templateCompiller(
             {
                 notes: notes
@@ -127,7 +135,6 @@ exports.postEdit = (req, res) => {
     });
 
 }
-
 
 function response(status, message, redirect) {
     return {

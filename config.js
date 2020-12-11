@@ -1,6 +1,6 @@
 module.exports={
     database:{
-        username: "root",
+        username: "",
         password: "",
         database: "sgi_db",
         host: "localhost"

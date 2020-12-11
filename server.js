@@ -10,7 +10,6 @@ const session=require('express-session');
 
 //Init app
 const app = express();
-require('./models/Associations');
 require('./passport/local-auth')
 
 //Settings

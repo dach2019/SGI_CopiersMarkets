@@ -1,6 +1,7 @@
 const express = require('express');
 const router=express.Router();
 const passport=require('passport');
+const User = require('../models/User');
 
 const main=require('../controllers/main');
 const items=require('../controllers/items');
@@ -95,18 +96,24 @@ module.exports=function(){
     //Lookup
     router.get('/lookup/:code',isAuthenticated,items.getLookup);
     
-    function isAuthenticated(req,res,next){
-        if(req.user){
+
+    async function isAuthenticated(req,res,next){ 
+        const nusers=await User.count();
+        if(req.user || nusers==0){
             return next();
         }
         res.redirect('/login');
 	return next();
     };
 
-    function isAllowed(req,res,next){
-        console.log(req.user);
-        if(req.user['dataValues']['type']=='Administrador'){
+    async function isAllowed(req,res,next){
+        const nusers=await User.count();
+        if(nusers==0){
             return next();
+        }else{
+            if(req.user['dataValues']['type']=='Administrador'){
+                return next();
+            }
         }
         res.redirect('/main')
 	return next();

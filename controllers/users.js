@@ -80,12 +80,12 @@ exports.getEdit = (req, res) => {
 
 exports.postEdit = (req, res) => {
     console.log(req.body);
-    let {id,name,postion,type,phone,email,password}=req.body;
+    let {id,name,position,type,phone,email,password}=req.body;
     password=User.encryptPassword(password);
     const updateUser={
         id,
         name,
-        postion,
+        position,
         type,
         phone,
         email,
